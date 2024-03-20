@@ -1,0 +1,44 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Define the number of VMs to create
+VM_COUNT = 3
+
+Vagrant.configure("2") do |config|
+
+  # Configurations that are common to all VMs can be set here
+  config.vm.box = "{{ cookiecutter.box_name }}"
+  config.vbguest.auto_update = false
+
+  # Loop from 1 to VM_COUNT to create multiple VMs
+  (1..VM_COUNT).each do |i|
+    config.vm.define "vm#{i}" do |vm|
+
+      # Give each VM a dynamic hostname
+      vm.vm.hostname = "vm#{i}"
+
+      {% if cookiecutter.network_type == 'public' %}
+      # Configure a public network (bridged) for each VM
+      vm.vm.network "public_network", bridge: "wlp0s20f3"
+      {% elif cookiecutter.network_type == 'private' %}
+      # Configure a private network for each VM
+      vm.vm.network "private_network", type: "dhcp"
+      {% endif %}
+
+      vm.vm.provider "virtualbox" do |vb|
+        vb.name = "VM_#{i}"
+        vb.memory = "{{ cookiecutter.vm_memory }}"
+      end
+
+      config.vbguest.auto_update = false
+
+      # Provisioning can be defined here if needed
+      vm.vm.provision "shell", inline: <<-SHELL
+        echo "Provisioning VM_#{i}..."
+        sudo apt-get update
+        # Add other provisioning commands here
+      SHELL
+
+    end
+  end
+end

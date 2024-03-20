@@ -1,0 +1,7 @@
+---
+- name: "{{ cookiecutter.Ansible_play_name }}"
+  hosts: all
+  become: yes
+  roles:
+    - role: mariadb
+      tags: mysql

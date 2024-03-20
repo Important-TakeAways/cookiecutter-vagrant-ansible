@@ -1,0 +1,9 @@
+{
+        "project_name": "vagrant_project",
+        "box_name": ["debian/bookworm64", "debian/bullseye64", "debian/stretch64", "debian/buster64", "ubuntu/bionic64", "ubuntu/focal64", "ubuntu/jammy64"],
+        "vm_count": ["1", "2", "3", "4", "5" ],
+        "vm_memory": "2048",
+        "network_type": ["public", "private"],
+        "bridge_interface": "wlp0s20f3",
+        "Ansible_play_name": "apache"
+    }
