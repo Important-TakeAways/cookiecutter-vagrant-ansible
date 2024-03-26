@@ -17,6 +17,8 @@ cookiecutter gh:Important-TakeAways/cookiecutter-vagrant-ansible
 - "ubuntu/bionic64" is ubuntu 18.04
 - "ubuntu/focal64" is ubuntu 20.04
 - "ubuntu/jammy64" is ubuntu 22.04
+- "generic/rhel8" is RHEL 8
+- "generic/rhel9" RHEL 9
 
 2. "vm_count", this is used to define number os vm(s) to be launched by Vagrant
 3. "vm_memory", this is used to define the memory/RAM for vm(s) to be launched by Vagrant
